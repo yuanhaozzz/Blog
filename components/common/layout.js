@@ -1,16 +1,38 @@
 
+import {Component} from 'react'
+
 import Head from 'next/head'
 
-export default function (props) {
-    return (
-        <div>
-            <Head>
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
-                <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-            </Head>
-            <section>
-                {props.children}
-            </section>
-        </div>
-    )
+import { globalStyle } from '../../assets/css/reset'
+export default class extends Component {
+    
+    constructor (props) {
+        super(props)
+    }
+
+    componentDidMount() {
+        if ('addEventListener' in document) {
+            document.addEventListener('DOMContentLoaded', function() {
+              FastClick.attach(document.body);
+            }, false);
+          }
+          if(!window.Promise) {
+            document.writeln('<script src="https://as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"'+'>'+'<'+'/'+'script>');
+          }
+    }
+
+    render () {
+        return (
+            <div>
+                <style jsx={true} global={true}>{globalStyle}</style>
+                <Head>
+                    <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
+                    <title>茄子也会笑-个人博客</title>
+                </Head>
+                <section>
+                    {this.props.children}
+                </section>
+            </div>
+        )
+    }
 }

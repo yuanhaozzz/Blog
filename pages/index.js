@@ -1,34 +1,20 @@
-import 'date-fns';
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import {
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
 
-const useStyles = makeStyles({
-  grid: {
-    width: '60%',
-  },
-});
+import Layout from '../components/common/layout'
+import Header from '../components/page/index/header'
+import Main from '../components/page/index/main'
+import Footer from '../components/page/index/footer'
 
-function MaterialUIPickers() {
-  // The first commit of Material-UI
-  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+function Home(props) {
+	const { classes } = props;
 
-  const classes = useStyles();
-
-  function handleDateChange(date) {
-    setSelectedDate(date);
-  }
-
-  return (
-    <KeyboardDatePicker
-          margin="normal"
-          label="Date picker"
-          value={selectedDate}
-          onChange={handleDateChange}
-    />
-  );
+	return (
+		<Layout>
+			<Header></Header>
+			<Main></Main>
+			<Footer></Footer>
+		</Layout>
+	);
 }
 
-export default MaterialUIPickers;
+export default Home

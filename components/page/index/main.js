@@ -3,39 +3,19 @@ import PropTypes from 'prop-types';
 import withWidth from '@material-ui/core/withWidth';
 import Hidden from '@material-ui/core/Hidden';
 import Grid from '@material-ui/core/Grid';
-import { withStyles } from '@material-ui/core/styles';
-
 import ImportImage from '../../../components/common/importImage'
 
-import compose from '../../../components/common/compose';
-
 import { format } from '../../../utils/common'
-
-const styles = theme => ({
-	root: {
-		flexGrow: 1,
-	},
-	container: {
-		display: 'flex',
-	},
-	paper: {
-		padding: theme.spacing(2),
-		textAlign: 'center',
-		color: theme.palette.text.secondary,
-		flex: '1 0 auto',
-		margin: theme.spacing(1),
-		fontSize: '26px;'
-	},
-});
 /**
  * 
  * @param {*} articleList   文章列表
  */
-function ArticleList ({articleList}) {
+function ArticleList (props) {
+    console.log(props)
     return (
-        articleList.map((item, index) => {
+        props.articleList.map((item, index) => {
             return (
-                <article className="main-article-list-item" key={ index }>
+                <article className="main-article-list-item" key={ index } onClick={() => props.clickArticle()}>
                     <h2>{ item.title }</h2>
                     <p>{ item.description }</p>
                     <span>发布于：{ format(item.date, 'yyyy-MM-dd') }</span>
@@ -47,6 +27,10 @@ function ArticleList ({articleList}) {
                             .main-article-list-item p{
                                 margin-bottom: 10px !important;
                             }
+                        }
+                        
+                        .main-article-list-item:nth-last-child(1){
+                            border: none;
                         }
                         .main-article-list-item{
                             padding: 10px; 0;
@@ -97,6 +81,11 @@ function Aside(props) {
                 </li>
             </ul>
             <style jsx global>{`
+                .aside{
+                    padding: 10px 10px;
+                    background-color: #fff;
+                    margin-left: 20px;
+                }
                 .aside img{
                     width: 150px;
                     margin: 0 auto;
@@ -112,156 +101,51 @@ function Aside(props) {
 class Main extends Component {
     constructor (props) {
         super(props)
-        this.state = {
-            articleList: [
-                {
-                    title: '面试官问：能否模拟实现JS的bind方法',
-                    description: '面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法',
-                    date: 1559289474639
-                },
-                {
-                    title: '面试官问：能否模拟实现JS的bind方法',
-                    description: '面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法',
-                    date: 15592894124639
-                },
-                {
-                    title: '面试官问：能否模拟实现JS的bind方法',
-                    description: '面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法',
-                    date: 1559289454639
-                },
-                {
-                    title: '面试官问：能否模拟实现JS的bind方法',
-                    description: '面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法',
-                    date: 1559289454639
-                },
-                {
-                    title: '面试官问：能否模拟实现JS的bind方法',
-                    description: '面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法',
-                    date: 1559289454639
-                },
-                {
-                    title: '面试官问：能否模拟实现JS的bind方法',
-                    description: '面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法',
-                    date: 1559289454639
-                },
-                {
-                    title: '面试官问：能否模拟实现JS的bind方法',
-                    description: '面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法',
-                    date: 1559289454639
-                },
-                {
-                    title: '面试官问：能否模拟实现JS的bind方法',
-                    description: '面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法',
-                    date: 1559289454639
-                },
-                {
-                    title: '面试官问：能否模拟实现JS的bind方法',
-                    description: '面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法',
-                    date: 1559289454639
-                },
-                {
-                    title: '面试官问：能否模拟实现JS的bind方法',
-                    description: '面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法',
-                    date: 1559289454639
-                },
-                {
-                    title: '面试官问：能否模拟实现JS的bind方法',
-                    description: '面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法',
-                    date: 1559289454639
-                },
-                {
-                    title: '面试官问：能否模拟实现JS的bind方法',
-                    description: '面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法',
-                    date: 1559289454639
-                },
-                {
-                    title: '面试官问：能否模拟实现JS的bind方法',
-                    description: '面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法',
-                    date: 1559289454639
-                },
-                {
-                    title: '面试官问：能否模拟实现JS的bind方法',
-                    description: '面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法',
-                    date: 1559289454639
-                },
-                {
-                    title: '面试官问：能否模拟实现JS的bind方法',
-                    description: '面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法',
-                    date: 1559289454639
-                },
-                {
-                    title: '面试官问：能否模拟实现JS的bind方法',
-                    description: '面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法',
-                    date: 1559289454639
-                },
-                {
-                    title: '面试官问：能否模拟实现JS的bind方法',
-                    description: '面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法',
-                    date: 1559289454639
-                },
-                {
-                    title: '面试官问：能否模拟实现JS的bind方法',
-                    description: '面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法',
-                    date: 1559289454639
-                },
-                {
-                    title: '面试官问：能否模拟实现JS的bind方法',
-                    description: '面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法',
-                    date: 1559289454639
-                },
-                {
-                    title: '面试官问：能否模拟实现JS的bind方法',
-                    description: '面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法',
-                    date: 1559289454639
-                },
-                {
-                    title: '面试官问：能否模拟实现JS的bind方法',
-                    description: '面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法面试官问：能否模拟实现JS的bind方法',
-                    date: 1559289454639
-                },
-            ]
-        }
+    }
+
+    clickArticle = e => {
+         //页面向小程序发送消息
+        //  wx.miniProgram.navigateTo({url: '/pages/logs/logs'})
+        // wx.miniProgram.postMessage({ data:{foo: 'bar'} })
+        wx.miniProgram.postMessage({ data: {foo: 'bar'} })
     }
 
     render () {
         return (
             <main className="main">
                 {/* 栅格布局响应式 */}
-                <Grid container justify="center" spacing={5}>
-                    <Grid container item xs={12} sm={8} md={6} lg={5} xl={5}>
+                <Grid container justify="center">
+                    <Grid container item xs={12} sm={8} md={6}>
                         <section className="main-article-list">
                             {/* 文章列表 */}
-                            <ArticleList articleList={ this.state.articleList }></ArticleList>
+                            <ArticleList clickArticle={this.clickArticle} articleList={ this.props.articleList }></ArticleList>
                         </section>
                     </Grid>
                     <Hidden only={['xs', 'sm']}>
-                        <Grid item xs={12} sm={12} md={2} gl={2} xl={2}>
+                        <Grid item xs={12} sm={12} md={2}>
                             {/* 侧边栏 */}
                             <Aside></Aside>
                         </Grid>
                     </Hidden>
-                    
                 </Grid>
-				
                 <style jsx>{`
                     .main{
+                        padding: 10px 0;
+                        background-color: #f6f6f6;
+                        border-bottom: 1px solid #eaecef;
                     }
                     .main-article-list{
+                        background-color: #fff;
                         {/* width */}
+                    }
+                `}</style>
+                <style jsx global>{`
+                    .MuiGrid-spacing-xs-5 > .MuiGrid-item{
+                        
                     }
                 `}</style>
             </main>
         )
     }
 }
-
-Main.propTypes = {
-	classes: PropTypes.object.isRequired,
-	width: PropTypes.string.isRequired,
-};
-
-
-export default compose(
-	withStyles(styles),
-	withWidth(),
-)(Main);
+export default Main
